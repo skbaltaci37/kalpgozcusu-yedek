@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalp Krizi Riski Tahmini</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #4B0082, #8b0000, #ff6347, #ffd700); /* Mor → Kırmızı → Sarı */
+    background-size: 400% 400%;
+    animation: gradientBG 6s infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 1s ease-in-out;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 50% 50%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+        h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 480px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #000000;
+	    font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff6f61;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e65c4f;
+        }
+
+        .result {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                padding: 20px;
+            }
+
+            button {
+                font-size: 16px;
+            }
+
+            label {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>Kalp Krizi Riski Tahmini</h2>
+        <form action="/predict" method="post">
+            <label for="Kilo">Kilo:</label>
+            <input type="number" name="Kilo" id="Kilo" step="0.1" required>
+
+            <label for="Boy">Boy:</label>
+            <input type="number" name="Boy" id="Boy" step="0.1" required>
+
+            <label for="Sigara">Sigara İçiyor mu? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="Sigara" id="Sigara" min="0" max="1" required>
+
+            <label for="Alkol">Alkol Kullanıyor mu? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="Alkol" id="Alkol" min="0" max="1" required>
+
+            <label for="Felc">Felç Geçirdi mi? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="Felc" id="Felc" min="0" max="1" required>
+
+            <label for="YururkenZorlanma">Yürürken Zorlanıyor mu? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="YururkenZorlanma" id="YururkenZorlanma" min="0" max="1" required>
+
+            <label for="Cinsiyet">Cinsiyet (0: Kadın, 1: Erkek)</label>
+            <input type="number" name="Cinsiyet" id="Cinsiyet" min="0" max="1" required>
+
+            <label for="FizikselAktivite">Fiziksel Aktivite Yapıyor mu? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="FizikselAktivite" id="FizikselAktivite" min="0" max="1" required>
+
+            <label for="Astim">Astım Hastalığı Var mı? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="Astim" id="Astim" min="0" max="1" required>
+
+            <label for="BobrekHast">Böbrek Hastalığı Var mı? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="BobrekHast" id="BobrekHast" min="0" max="1" required>
+
+            <label for="UykuSuresi">Uyku Süresi (Saat):</label>
+            <input type="number" name="UykuSuresi" id="UykuSuresi" step="0.1" required>
+
+            <label for="Diabet">Diyabet Var mı? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="Diabet" id="Diabet" min="0" max="1" required>
+
+            <label for="GenetikVarMi">Ailede Kalp Hastalığı Var mı? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="GenetikVarMi" id="GenetikVarMi" min="0" max="1" required>
+
+            <label for="Yas40">Yaş 40 ve Üzeri mi? (0: Hayır, 1: Evet)</label>
+            <input type="number" name="Yas40" id="Yas40" min="0" max="1" required>
+
+            <button type="submit">Tahmin Yap</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            <strong>Sonuç:</strong> {{ prediction_text }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
